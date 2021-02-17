@@ -1,0 +1,35 @@
+version: '2.3'
+
+services:
+  notebook:
+#    image: tackman/jupyter-cuda
+#    image: jupyter/datascience-notebook:9b06df75e445
+#    image: nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu20.04
+#    image: nvidia/cuda:11.2.1-cudnn8-runtime-ubuntu20.04
+    image: nvidia/cuda:11.2.1-cudnn8-devel-ubuntu20.04
+#    container_name: datascience-notebook
+    container_name: nvidia-cuda
+    build: ./
+    tty: true
+    ports:
+      - 8991:8888
+    volumes:
+      - /mnt/seagate8t0/m-ochi/ochi_gpu_jupyter2/ipnbs/:/home/user1/work/
+    user: root
+    environment:
+      NB_UID: 1000
+      NB_GID: 100
+      GRANT_SUDO: "yes"
+    privileged: true
+    networks:
+      - default
+    runtime: nvidia
+    ipc: host
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+#    restart: unless-stopped
+    command: jupyter lab --NotebookApp.token='' --ip=0.0.0.0 --no-browser --allow-root
+
+networks:
+  default:
+    driver: bridge
