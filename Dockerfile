@@ -38,7 +38,8 @@ RUN pip3 install --no-index torch-cluster -f https://pytorch-geometric.com/whl/t
 RUN pip3 install --no-index torch-spline-conv -f https://pytorch-geometric.com/whl/torch-1.7.0+cu110.html
 RUN pip3 install torch-geometric
 RUN pip3 install pyvis ogb
-RUN pip3 install tensorflow
+#RUN pip3 install tensorflow # pytorchからのtensorboard利用にトラブルが発生したのでtensorflowを入れない
+RUN pip3 install tensorboard
 
 #RUN pip install --upgrade nbstripout
 #RUN nbstripout --install --attributes .gitattributes
@@ -46,14 +47,14 @@ RUN pip3 install tensorflow
 ARG username=user1
 ARG wkdir=/home/user1/work
 
-# echo "username:password" | chpasswd
-# root password is "root"
+ #echo "username:password" | chpasswd
+ #root password is "root"
 
-#RUN echo "root:root" | chpasswd && \
-#    adduser --disabled-password --gecos "" "${username}" && \
-#    echo "${username}:${username}" | chpasswd && \
-#    echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} && \
-#    chmod 0440 /etc/sudoers.d/${username} 
+RUN echo "root:root" | chpasswd && \
+    adduser --disabled-password --gecos "" "${username}" && \
+    echo "${username}:${username}" | chpasswd && \
+    echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} && \
+    chmod 0440 /etc/sudoers.d/${username} 
     
 WORKDIR ${wkdir}
 RUN chown ${username}:${username} ${wkdir}
