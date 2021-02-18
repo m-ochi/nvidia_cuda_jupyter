@@ -24,6 +24,7 @@ ENV LANGUAGE=ja_JP.UTF-8
 
 RUN aptitude install -y python3-pip
 
+RUN pip3 install scipy==1.6.0
 RUN pip3 install jupyterlab
 RUN pip3 install ipywidgets
 RUN pip3 install transformers
@@ -50,11 +51,11 @@ ARG wkdir=/home/user1/work
  #echo "username:password" | chpasswd
  #root password is "root"
 
-RUN echo "root:root" | chpasswd && \
-    adduser --disabled-password --gecos "" "${username}" && \
-    echo "${username}:${username}" | chpasswd && \
-    echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} && \
-    chmod 0440 /etc/sudoers.d/${username} 
+#RUN echo "root:root" | chpasswd && \
+#    adduser --disabled-password --gecos "" "${username}" && \
+#    echo "${username}:${username}" | chpasswd && \
+#    echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} && \
+#    chmod 0440 /etc/sudoers.d/${username} 
     
 WORKDIR ${wkdir}
 RUN chown ${username}:${username} ${wkdir}
