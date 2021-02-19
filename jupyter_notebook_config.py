@@ -26,7 +26,7 @@ def script_post_save(model, os_path, contents_manager, **kwargs):
     script, resources = _script_exporter.from_filename(os_path)
     script_fname = base + resources.get('output_extension', '.txt')
     log.info("Saving script /%s", to_api_path(script_fname, contents_manager.root_dir))
-    with io.open(script_fname, 'w', encoding='utf-8') as f:
+    with open(script_fname, 'w', encoding='utf-8') as f:
         f.write(script)
  
 c.FileContentsManager.post_save_hook = script_post_save
