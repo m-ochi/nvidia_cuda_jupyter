@@ -42,6 +42,8 @@ RUN pip3 install pyvis ogb
 #RUN pip3 install tensorflow # pytorchからのtensorboard利用にトラブルが発生したのでtensorflowを入れない
 RUN pip3 install tensorboard
 
+COPY ./jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
+
 #RUN pip install --upgrade nbstripout
 #RUN nbstripout --install --attributes .gitattributes
 
