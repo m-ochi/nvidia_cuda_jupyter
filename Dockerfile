@@ -41,6 +41,7 @@ RUN pip3 install torch-geometric
 RUN pip3 install pyvis ogb
 #RUN pip3 install tensorflow # pytorchからのtensorboard利用にトラブルが発生したのでtensorflowを入れない
 RUN pip3 install tensorboard
+RUn pip3 install umap-learn
 
 COPY ./jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
